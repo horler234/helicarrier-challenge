@@ -22,6 +22,7 @@ import { useQuery } from "@apollo/client";
 import { FETCH_CRUSHES } from "@utils/queries";
 import { EmptyCrush } from "@components/EmptyCrush";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Crush } from "@utils/types/Crush";
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -85,9 +86,12 @@ export const Home = () => {
    * @todo render skeleton loader while it is loading
    * @todo use live data
    * */
-  const { data, loading } = useQuery(FETCH_CRUSHES, {
-    fetchPolicy: "cache-and-network",
-  });
+  const { data, loading }: { data: Crush[]; loading: boolean } = useQuery(
+    FETCH_CRUSHES,
+    {
+      fetchPolicy: "cache-and-network",
+    }
+  );
 
   const [filter, setFilter] = useState<typeof countries[number] | "All">("All");
 
